@@ -29,3 +29,27 @@ plt.grid(True, alpha=0.3)
 plt.savefig('vaccination_histogram.png')
 plt.show()
 plt.close()
+
+# Create vaccination timeline for top 5 countries
+top_countries = latest_data.nlargest(5, 'people_fully_vaccinated_per_hundred')['location'].tolist()
+timeline_data = df[df['location'].isin(top_countries)]
+
+plt.figure(figsize=(14, 7))
+for country in top_countries:
+    country_data = timeline_data[timeline_data['location'] == country]
+    plt.plot(country_data['date'], 
+            country_data['people_fully_vaccinated_per_hundred'],
+            marker='o',
+            markersize=2,
+            label=country)
+
+plt.title('Vaccination Progress Over Time - Top 5 Countries')
+plt.xlabel('Date')
+plt.ylabel('People Fully Vaccinated per 100')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('vaccination_timeline.png')
+plt.show()
+plt.close()
