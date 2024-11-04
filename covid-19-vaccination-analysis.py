@@ -74,3 +74,11 @@ plt.tight_layout()
 plt.savefig('correlation_heatmap.png')
 plt.show()
 plt.close()
+
+# Generate statistics
+basic_stats = latest_data['people_fully_vaccinated_per_hundred'].describe()
+print("\nBasic Statistics for Full Vaccination Rates:")
+print(basic_stats)
+
+print("\nCorrelation Matrix:")
+print(correlation_matrix)
