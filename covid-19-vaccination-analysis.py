@@ -53,3 +53,24 @@ plt.tight_layout()
 plt.savefig('vaccination_timeline.png')
 plt.show()
 plt.close()
+
+# Create correlation heatmap
+correlation_vars = ['total_vaccinations_per_hundred', 
+                   'people_vaccinated_per_hundred',
+                   'people_fully_vaccinated_per_hundred',
+                   'total_boosters_per_hundred']
+
+correlation_matrix = latest_data[correlation_vars].corr()
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, 
+            annot=True, 
+            cmap='coolwarm', 
+            center=0,
+            vmin=-1, 
+            vmax=1)
+plt.title('Correlation Between Vaccination Metrics')
+plt.tight_layout()
+plt.savefig('correlation_heatmap.png')
+plt.show()
+plt.close()
